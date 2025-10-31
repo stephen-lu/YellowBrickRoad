@@ -14,7 +14,7 @@ public class Circle
     private int diameter;
     private int xPosition;
     private int yPosition;
-    private String color;
+    private Color color;
     private boolean isVisible;
 
     /**
@@ -25,8 +25,17 @@ public class Circle
         diameter = 30;
         xPosition = 20;
         yPosition = 60;
-        color = "blue";
+        color = Color.blue;
         isVisible = false;
+    }
+
+    public Circle(int diameter, int xPosition, int yPosition, Color color)
+    {
+        this.diameter = diameter;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        this.color = color;
+        this.isVisible = false;
     }
 
     /**
@@ -161,7 +170,7 @@ public class Circle
      * Change the color. Valid colors are "red", "yellow", "blue", "green",
      * "magenta" and "black".
      */
-    public void changeColor(String newColor)
+    public void changeColor(Color newColor)
     {
         color = newColor;
         draw();

@@ -2,16 +2,9 @@ package rocks.zipcode.dreamhouse;
 
 import java.awt.*;
 
-/**
- * A square that can be manipulated and that draws itself on a canvas.
- * 
- * @author  Michael Kölling and David J. Barnes
- * @version 1.0  (15 July 2000)
- */
-
-public class Square
-{
-    private int size;
+public class RectangleZC {
+    private int width;
+    private int height;
     private int xPosition;
     private int yPosition;
     private Color color;
@@ -20,18 +13,20 @@ public class Square
     /**
      * Create a new square at default position with default color.
      */
-    public Square()
+    public RectangleZC()
     {
-        size = 30;
+        width = 60;
+        height = 30;
         xPosition = 60;
         yPosition = 50;
         color = Color.red;
         isVisible = false;
     }
 
-    public Square(int size, int xPosition, int yPosition, Color color)
+    public RectangleZC(int width, int height, int xPosition, int yPosition, Color color)
     {
-        this.size = size;
+        this.width = width;
+        this.height = height;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.color = color;
@@ -159,10 +154,17 @@ public class Square
     /**
      * Change the size to the new size (in pixels). Size must be >= 0.
      */
-    public void changeSize(int newSize)
+    public void changeWidth(int newWidth)
     {
         erase();
-        size = newSize;
+        width = newWidth;
+        draw();
+    }
+
+    public void changeHeight(int newHeight)
+    {
+        erase();
+        height = newHeight;
         draw();
     }
 
@@ -184,7 +186,7 @@ public class Square
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.draw(this, color,
-                    new Rectangle(xPosition, yPosition, size, size));
+                    new Rectangle(xPosition, yPosition, width, height));
             canvas.wait(10);
         }
     }

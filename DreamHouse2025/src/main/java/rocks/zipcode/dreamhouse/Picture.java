@@ -1,5 +1,7 @@
 package rocks.zipcode.dreamhouse;
 
+import java.awt.Color;
+
 /**
  * This class represents a simple picture. You can draw the picture using
  * the draw method. But wait, there's more: being an electronic picture, it
@@ -13,10 +15,6 @@ package rocks.zipcode.dreamhouse;
  */
 public class Picture
 {
-    private Square wall;
-    private Square window;
-    private Triangle roof;
-    private Circle sun;
 
     /**
      * Constructor for objects of class Picture
@@ -31,57 +29,128 @@ public class Picture
      */
     public void draw()
     {
-        wall = new Square();
-        wall.moveVertical(80);
-        wall.changeSize(100);
-        wall.makeVisible();
+        drawTower(50, 50);
+        drawTower(750, 50);
+        drawTowerNoTopper(350, 50);
+        drawTowerNoTopper(450, 50);
+        drawRoof(250, 25);
+        drawWall(150, 50);
+        drawWall(250, 50);
+        drawWall(550, 50);
+        drawWall(650, 50);
+        drawBorders(0, 0);
+        drawDoor(0, 0);
+    }
 
-        window = new Square();
-        window.changeColor("black");
-        window.moveHorizontal(20);
-        window.moveVertical(100);
-        window.makeVisible();
+    public void drawDoor(int xOffset, int yOffset)
+    {
+        RectangleZC door = new RectangleZC(100, 150, 400, 225, new Color(127, 81, 18));
+        door.makeVisible();
+        Circle doorTop = new Circle(100, 400, 175, new Color(127, 81, 18));
+        doorTop.makeVisible();
+        RectangleZC doorLineVertical = new RectangleZC(4, 200, 448, 175, Color.darkGray);
+        doorLineVertical.makeVisible();
+        RectangleZC doorLineHorizontal1 = new RectangleZC(100, 4, 400, 325, Color.darkGray);
+        doorLineHorizontal1.makeVisible();
+        RectangleZC doorLineHorizontal2 = new RectangleZC(100, 4, 400, 250, Color.darkGray);
+        doorLineHorizontal2.makeVisible();
+    }
 
-        roof = new Triangle();
-        roof.changeSize(50, 140);
-        roof.moveHorizontal(60);
-        roof.moveVertical(70);
+    public void drawBorders(int xOffset, int yOffset)
+    {
+        RectangleZC[] border = new RectangleZC[4];
+        border[0] = new RectangleZC(4, 250, 148 + xOffset, 125 + yOffset, Color.BLACK);
+        border[0].makeVisible();
+        border[1] = new RectangleZC(4, 250, 348 + xOffset, 125 + yOffset, Color.BLACK);
+        border[1].makeVisible();
+        border[2] = new RectangleZC(4, 250, 548 + xOffset, 125 + yOffset, Color.BLACK);
+        border[2].makeVisible();
+        border[3] = new RectangleZC(4, 250, 748 + xOffset, 125 + yOffset, Color.BLACK);
+        border[3].makeVisible();
+    }
+
+    public void drawRoof(int xOffset, int yOffset)
+    {
+        Triangle roof = new Triangle(50, 200, 200 + xOffset, 0 + yOffset, Color.darkGray);
         roof.makeVisible();
-
-        sun = new Circle();
-        sun.changeColor("yellow");
-        sun.moveHorizontal(180);
-        sun.moveVertical(-10);
-        sun.changeSize(60);
-        sun.makeVisible();
     }
 
-    /**
-     * Change this picture to black/white display
-     */
-    public void setBlackAndWhite()
+    public void drawTower(int xOffset, int yOffset) 
     {
-        if(wall != null)   // only if it's painted already...
-        {
-            wall.changeColor("black");
-            window.changeColor("white");
-            roof.changeColor("black");
-            sun.changeColor("black");
+        RectangleZC TowerBG = new RectangleZC(100, 300, 0 + xOffset, 25 + yOffset, Color.LIGHT_GRAY);
+        TowerBG.makeVisible();
+        RectangleZC topLine = new RectangleZC(100,4, 0 + xOffset, 25 + yOffset, Color.BLACK);
+        topLine.makeVisible();
+        RectangleZC[] topper = new RectangleZC[3];
+        
+        for (int i = 0; i < topper.length; i++) {
+            topper[i] = new RectangleZC(30, 25, 0 + (35 * i) + xOffset, 0 + yOffset, Color.lightGray);
+            topper[i].makeVisible();
         }
+
+        RectangleZC[] brickLines = new RectangleZC[30];
+
+        for (int i = 0; i < brickLines.length; i+=5) {
+            brickLines[i%5] = new RectangleZC(4, 25, 48 + xOffset, 25 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5].makeVisible();
+            brickLines[i%5+1] = new RectangleZC(100,4, 0 + xOffset, 46 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+1].makeVisible();
+            brickLines[i%5+2] = new RectangleZC(4, 25, 23 + xOffset, 50 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+2].makeVisible();
+            brickLines[i%5+3] = new RectangleZC(4, 25, 73 + xOffset, 50 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+3].makeVisible();
+            brickLines[i%5+4] = new RectangleZC(100,4, 0 + xOffset, 71 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+4].makeVisible();
+        }
+        
     }
 
-    /**
-     * Change this picture to use color display
-     */
-    public void setColor()
+    public void drawTowerNoTopper(int xOffset, int yOffset) 
     {
-        if(wall != null)   // only if it's painted already...
-        {
-            wall.changeColor("red");
-            window.changeColor("black");
-            roof.changeColor("green");
-            sun.changeColor("yellow");
+        RectangleZC TowerBG = new RectangleZC(100, 300, 0 + xOffset, 25 + yOffset, Color.LIGHT_GRAY);
+        TowerBG.makeVisible();
+        RectangleZC topLine = new RectangleZC(100,4, 0 + xOffset, 25 + yOffset, Color.BLACK);
+        topLine.makeVisible();
+
+        RectangleZC[] brickLines = new RectangleZC[30];
+
+        for (int i = 0; i < brickLines.length; i+=5) {
+            brickLines[i%5] = new RectangleZC(4, 25, 48 + xOffset, 25 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5].makeVisible();
+            brickLines[i%5+1] = new RectangleZC(100,4, 0 + xOffset, 46 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+1].makeVisible();
+            brickLines[i%5+2] = new RectangleZC(4, 25, 23 + xOffset, 50 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+2].makeVisible();
+            brickLines[i%5+3] = new RectangleZC(4, 25, 73 + xOffset, 50 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+3].makeVisible();
+            brickLines[i%5+4] = new RectangleZC(100,4, 0 + xOffset, 71 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+4].makeVisible();
         }
+        
+    }
+
+    public void drawWall(int xOffset, int yOffset) 
+    {
+        RectangleZC TowerBG = new RectangleZC(100, 250, 0 + xOffset, 75 + yOffset, Color.LIGHT_GRAY);
+        TowerBG.makeVisible();
+        RectangleZC topLine = new RectangleZC(100,4, 0 + xOffset, 75 + yOffset, Color.BLACK);
+        topLine.makeVisible();
+
+        RectangleZC[] brickLines = new RectangleZC[25];
+
+        for (int i = 0; i < brickLines.length; i+=5) {
+            brickLines[i%5] = new RectangleZC(4, 25, 48 + xOffset, 75 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5].makeVisible();
+            brickLines[i%5+1] = new RectangleZC(100,4, 0 + xOffset, 96 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+1].makeVisible();
+            brickLines[i%5+2] = new RectangleZC(4, 25, 23 + xOffset, 100 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+2].makeVisible();
+            brickLines[i%5+3] = new RectangleZC(4, 25, 73 + xOffset, 100 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+3].makeVisible();
+            brickLines[i%5+4] = new RectangleZC(100,4, 0 + xOffset, 121 + (50 * (i/5)) + yOffset, Color.BLACK);
+            brickLines[i%5+4].makeVisible();
+        }
+        
     }
 
 }

@@ -15,7 +15,7 @@ public class Triangle
     private int width;
     private int xPosition;
     private int yPosition;
-    private String color;
+    private Color color;
     private boolean isVisible;
 
     /**
@@ -27,7 +27,17 @@ public class Triangle
         width = 40;
         xPosition = 50;
         yPosition = 15;
-        color = "green";
+        color = Color.green;
+        isVisible = false;
+    }
+
+    public Triangle(int height, int width, int xPosition, int yPosition, Color color)
+    {
+        this.height = height;
+        this.width = width;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        this.color = color;
         isVisible = false;
     }
 
@@ -164,7 +174,7 @@ public class Triangle
      * Change the color. Valid colors are "red", "yellow", "blue", "green",
      * "magenta" and "black".
      */
-    public void changeColor(String newColor)
+    public void changeColor(Color newColor)
     {
         color = newColor;
         draw();

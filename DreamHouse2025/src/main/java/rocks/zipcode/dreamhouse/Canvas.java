@@ -29,8 +29,8 @@ public class Canvas
     public static Canvas getCanvas()
     {
         if(canvasSingleton == null) {
-            canvasSingleton = new Canvas("BlueJ Shapes Demo", 300, 300, 
-                    Color.white);
+            canvasSingleton = new Canvas("BlueJ Shapes Demo", 1000, 500, 
+                    Color.cyan);
         }
         canvasSingleton.setVisible(true);
         return canvasSingleton;
@@ -98,7 +98,7 @@ public class Canvas
      // Note: this is a slightly backwards way of maintaining the shape
      // objects. It is carefully designed to keep the visible shape interfaces
      // in this project clean and simple for educational purposes.
-    public void draw(Object referenceObject, String color, Shape shape)
+    public void draw(Object referenceObject, Color color, Shape shape)
     {
         objects.remove(referenceObject);   // just in case it was already there
         objects.add(referenceObject);      // add at the end
@@ -120,7 +120,7 @@ public class Canvas
     /**
      * Set the foreground colour of the Canvas.
      * @param  newColour   the new colour for the foreground of the Canvas 
-     */
+    
     public void setForegroundColor(String colorString)
     {
         if(colorString.equals("red"))
@@ -140,6 +140,7 @@ public class Canvas
         else
             graphic.setColor(Color.black);
     }
+    */
 
     /**
      * Wait for a specified number of milliseconds before finishing.
@@ -205,17 +206,17 @@ public class Canvas
     private class ShapeDescription
     {
         private Shape shape;
-        private String colorString;
+        private Color color;
 
-        public ShapeDescription(Shape shape, String color)
+        public ShapeDescription(Shape shape, Color color)
         {
             this.shape = shape;
-            colorString = color;
+            this.color = color;
         }
 
         public void draw(Graphics2D graphic)
         {
-            setForegroundColor(colorString);
+            graphic.setColor(color);
             graphic.fill(shape);
         }
     }
